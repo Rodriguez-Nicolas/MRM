@@ -23,48 +23,26 @@
 """
 
 import os
-
 from qgis.PyQt.QtCore import QVariant
 from qgis.PyQt import uic
 from qgis.PyQt import QtWidgets
-from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayerProxyModel
 from qgis.core import (
-    QgsMessageLog,
     Qgis,
-    QgsApplication,
-    QgsDataSourceUri,
-    QgsCategorizedSymbolRenderer,
-    QgsClassificationRange,
-    QgsPointXY,
     QgsProject,
-    QgsExpression,
     QgsField,
     QgsFields,
-    QgsFeature,
     QgsFeatureRequest,
-    QgsFeatureRenderer,
-    QgsGeometry,
-    QgsGraduatedSymbolRenderer,
-    QgsMarkerSymbol,
-    QgsMessageLog,
-    QgsRectangle,
-    QgsRendererCategory,
-    QgsRendererRange,
-    QgsSymbol,
-    QgsVectorDataProvider,
-    QgsVectorLayer,
     QgsVectorFileWriter,
-    QgsWkbTypes,
-    QgsSpatialIndex,
-    QgsVectorLayerUtils
+    QgsWkbTypes
 )
-
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
+from scripts.hola_mundo import hola_mundo
+hola_mundo()
 
 # This loads your .ui file so that PyQt can populate your plugin with the elements from Qt Designer
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'minimo_dialog_base.ui'))
-
+FORM_CLASS, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'minimo_dialog_base.ui'))
 
 class minimoDialog(QtWidgets.QDialog, FORM_CLASS):
 
@@ -85,12 +63,11 @@ class minimoDialog(QtWidgets.QDialog, FORM_CLASS):
         self.combo_lluvias.setSourceLayer(QgsProject.instance().mapLayersByName("lluvias")[0])
 
         #self.widget_dir.fileChanged.connect(dir_path = self.widget_dir.filePath())
-        #self.pushButton_2.clicked.connect(self.hola_mundo)
+        self.btn_model.clicked.connect(hola_mundo())
         self.btn_generar_estructura.clicked.connect(self.generar_estructura)
         self.btn_calcular_atributos.clicked.connect(self.calcular_atributos)
 
-    def hola_mundo(self):
-        pass
+    #def hola_mundo(self):
         #self.iface.messageBar().pushMessage("Exito",self.widget_dir.filePath() , level = Qgis.Success, duration=5)
         #self.iface.messageBar().pushMessage("Exito","El programa esta funcionando correctamente", level = Qgis.Success, duration=5)
         #self.iface.messageBar().pushMessage(f"Capa seleccionada:",f"{self.combo_DEM.currentLayer()}", level = Qgis.Success, duration=5)

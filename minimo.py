@@ -163,7 +163,7 @@ class minimo:
         icon_path = ':/plugins/minimo/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr(u'minimo'),
+            text=self.tr(u'MRM'),
             callback=self.run,
             parent=self.iface.mainWindow())
 
